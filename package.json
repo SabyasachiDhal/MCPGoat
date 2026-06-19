@@ -1,0 +1,46 @@
+{
+  "name": "mcpgoat",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCPGoat - a deliberately insecure Model Context Protocol server for authorized penetration-testing practice",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-security",
+    "llm-security",
+    "security-training",
+    "pentesting",
+    "vulnerable-app",
+    "ctf",
+    "appsec"
+  ],
+  "author": {
+    "name": "Sabyasachi Dhal",
+    "url": "https://www.linkedin.com/in/sabyasachidhal/"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_NO_WARNINGS=1 tsx src/server.ts",
+    "dev": "NODE_NO_WARNINGS=1 tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "bundle": "esbuild src/server.ts --bundle --platform=node --format=esm --target=node22 --outfile=bundle/server.mjs --minify --legal-comments=none --banner:js=\"import{createRequire as __cr}from'module';const require=__cr(import.meta.url);\"",
+    "serve": "NODE_NO_WARNINGS=1 node dist/server.js",
+    "attack": "NODE_NO_WARNINGS=1 tsx src/attacker/client.ts",
+    "agent": "NODE_NO_WARNINGS=1 tsx src/agent/agent.ts",
+    "ci": "NODE_NO_WARNINGS=1 tsx src/ci/check.ts",
+    "inspect": "npx -y @modelcontextprotocol/inspector"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "express": "^4.21.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.28.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /SOLUTIONS.md
+Disallow: /EXPLOITS.http
+
+Sitemap: https://sabyasachidhal.github.io/MCPGoat/sitemap.xml

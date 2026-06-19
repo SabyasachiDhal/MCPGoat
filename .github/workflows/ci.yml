@@ -1,0 +1,45 @@
+name: regression
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24" # Node 24 ships node:sqlite unflagged
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck + build (the Docker build path)
+        run: |
+          npx tsc --noEmit
+          npm run build
+
+      - name: Regression gate (attacker 78/78 + secure 26/26, agent 3/3 naive & 0/3 defended)
+        run: npm run ci
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t mcpgoat .
+      - name: Boot container and smoke-test the MCP endpoint
+        run: |
+          docker run -d --name mcpgoat -p 127.0.0.1:7332:7332 mcpgoat
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:7332/api/state >/dev/null && break
+            sleep 1
+          done
+          curl -sf http://127.0.0.1:7332/api/state | grep -q '"level"'
+          docker rm -f mcpgoat

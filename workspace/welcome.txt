@@ -1,0 +1,4 @@
+Welcome to the MCPGoat workspace.
+
+This directory is what read_project_file is *supposed* to expose.
+Try reading "notes.md". Then ask yourself what else path.join() will accept.

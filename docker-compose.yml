@@ -1,0 +1,13 @@
+# MCPGoat — one-command deploy.
+#   docker compose up --build
+# Published to host loopback only (safe). Change MCPGOAT_LEVEL to start elsewhere.
+services:
+  mcpgoat:
+    build: .
+    image: mcpgoat
+    container_name: mcpgoat
+    ports:
+      - "127.0.0.1:7332:7332" # host loopback only — do NOT use "7332:7332"
+    environment:
+      MCPGOAT_LEVEL: easy
+    restart: "no"

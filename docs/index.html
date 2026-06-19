@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MCPGoat — A Deliberately Vulnerable MCP Server for Penetration Testing</title>
+<meta name="description" content="A deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 3 difficulty levels, 78 flags. Free and MIT-licensed.">
+<meta name="keywords" content="vulnerable MCP server, MCP penetration testing, Model Context Protocol security, MCP security lab, MCP CTF, AI security, LLM security, prompt injection, tool poisoning, deliberately insecure MCP">
+<meta name="author" content="Sabyasachi Dhal">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://sabyasachidhal.github.io/MCPGoat/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MCPGoat">
+<meta property="og:title" content="MCPGoat — Hack the Model Context Protocol">
+<meta property="og:description" content="A deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 3 difficulty levels, 78 flags. Free and MIT-licensed.">
+<meta property="og:url" content="https://sabyasachidhal.github.io/MCPGoat/">
+<meta property="og:image" content="https://sabyasachidhal.github.io/MCPGoat/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MCPGoat — Hack the Model Context Protocol">
+<meta name="twitter:description" content="A deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 78 flags, MIT-licensed.">
+<meta name="twitter:image" content="https://sabyasachidhal.github.io/MCPGoat/img/og-card.png">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐐</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://sabyasachidhal.github.io/MCPGoat/#website",
+      "url": "https://sabyasachidhal.github.io/MCPGoat/",
+      "name": "MCPGoat",
+      "description": "A deliberately vulnerable Model Context Protocol (MCP) server for penetration-testing practice."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "MCPGoat",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Docker, Node.js (cross-platform)",
+      "softwareVersion": "2.0.0",
+      "description": "MCPGoat is a deliberately vulnerable Model Context Protocol (MCP) server for authorized penetration-testing practice. It implements 26 challenges across three difficulty levels (Easy, Moderate, Difficult) plus a secure reference, for a total of 78 capture-the-flag flags covering MCP-specific and classic web vulnerabilities.",
+      "url": "https://github.com/SabyasachiDhal/MCPGoat",
+      "downloadUrl": "https://github.com/SabyasachiDhal/MCPGoat",
+      "license": "https://opensource.org/licenses/MIT",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Sabyasachi Dhal", "url": "https://www.linkedin.com/in/sabyasachidhal/" },
+      "keywords": "vulnerable MCP server, MCP penetration testing, Model Context Protocol security, MCP CTF, AI security, LLM security, prompt injection, tool poisoning"
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --line:#283041;
+    --txt:#e6edf3; --muted:#9aa7b5; --accent:#4ade80; --accent2:#38bdf8;
+    --amber:#f5b942; --red:#ff7b72; --radius:14px; --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--txt);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent2); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,kbd{font-family:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+  .mono{font-family:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+  /* hero */
+  header.hero{
+    text-align:center; padding:72px 0 40px;
+    background:
+      radial-gradient(900px 380px at 50% -120px, rgba(74,222,128,.13), transparent 70%),
+      radial-gradient(700px 300px at 50% -60px, rgba(56,189,248,.10), transparent 70%);
+    border-bottom:1px solid var(--line);
+  }
+  .badges{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:22px}
+  .pill{
+    font-size:12.5px; color:var(--muted); border:1px solid var(--line);
+    background:var(--panel); padding:5px 11px; border-radius:999px;
+  }
+  .pill b{color:var(--accent)}
+  h1.brand{font-size:clamp(44px,9vw,76px); margin:.1em 0 .12em; letter-spacing:-1.5px; line-height:1}
+  h1.brand .goat{filter:drop-shadow(0 4px 14px rgba(74,222,128,.35))}
+  .tagline{font-size:clamp(18px,3.2vw,24px); color:var(--accent); font-weight:600; margin:0 0 14px}
+  .lede{max-width:660px; margin:0 auto 28px; color:var(--muted); font-size:17.5px}
+  .lede b{color:var(--txt)}
+  .cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:15px;
+    padding:12px 20px; border-radius:10px; border:1px solid var(--line);
+    background:var(--panel); color:var(--txt); transition:.15s;
+  }
+  .btn:hover{text-decoration:none; transform:translateY(-1px); border-color:#3a455c}
+  .btn.primary{background:var(--accent); color:#06210f; border-color:transparent}
+  .btn.primary:hover{background:#5ef08e}
+
+  /* stat strip */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+    border-radius:var(--radius); overflow:hidden; margin:40px 0;
+  }
+  .stat{background:var(--panel); padding:22px 12px; text-align:center}
+  .stat .n{font-size:30px; font-weight:800; color:var(--accent); line-height:1}
+  .stat .l{font-size:13px; color:var(--muted); margin-top:6px}
+
+  section{padding:46px 0; border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(24px,4vw,30px); margin:0 0 8px; letter-spacing:-.5px}
+  .sub{color:var(--muted); margin:0 0 26px; max-width:680px}
+
+  .grid{display:grid; gap:14px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 18px 16px;
+  }
+  .card h3{margin:0 0 6px; font-size:16.5px}
+  .card p{margin:0; color:var(--muted); font-size:14.5px}
+
+  .vulns{display:flex; flex-wrap:wrap; gap:8px}
+  .tag{
+    font-size:13px; background:var(--panel2); border:1px solid var(--line);
+    color:#cdd7e2; padding:6px 11px; border-radius:8px;
+  }
+  .tag b{color:var(--accent)}
+
+  table.levels{width:100%; border-collapse:collapse; font-size:14.5px; margin-top:6px}
+  table.levels th,table.levels td{border:1px solid var(--line); padding:10px 12px; text-align:left}
+  table.levels thead th{background:var(--panel2); color:var(--txt)}
+  table.levels td:first-child{color:var(--muted); font-weight:600}
+  table.levels .secure{color:var(--accent)}
+
+  pre.cmd{
+    background:#0a0d13; border:1px solid var(--line); border-radius:10px;
+    padding:16px 18px; overflow:auto; font-size:14px; color:#d7e2ee; margin:0;
+  }
+  pre.cmd .c{color:#6b7a8d}
+  pre.cmd .p{color:var(--accent)}
+
+  .shots{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:8px}
+  .shots figure{margin:0}
+  .shots img{
+    width:100%; height:auto; border:1px solid var(--line); border-radius:10px; display:block;
+    background:var(--panel);
+  }
+  .shots figcaption{color:var(--muted); font-size:13px; margin-top:8px; text-align:center}
+
+  .warn{
+    background:rgba(245,185,66,.08); border:1px solid rgba(245,185,66,.35);
+    border-radius:10px; padding:14px 16px; color:#f2d49a; font-size:14.5px; margin-top:24px;
+  }
+  .warn b{color:var(--amber)}
+
+  footer{padding:40px 0 60px; text-align:center; color:var(--muted); font-size:14px}
+  footer a{color:var(--accent2)}
+  footer .disc{max-width:620px; margin:14px auto 0; font-size:12.5px; opacity:.8}
+
+  @media(max-width:760px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .g3,.g2,.shots{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="badges">
+      <span class="pill">License <b>MIT</b></span>
+      <span class="pill"><b>26</b> challenges</span>
+      <span class="pill"><b>78</b> flags</span>
+      <span class="pill">Model Context Protocol</span>
+    </div>
+    <h1 class="brand"><span class="goat">🐐</span> MCPGoat</h1>
+    <p class="tagline">Hack the Model Context Protocol</p>
+    <p class="lede">
+      A <b>deliberately vulnerable Model Context Protocol (MCP) server</b> for hands-on
+      <b>penetration-testing practice</b>. Pick a difficulty level, then attack real MCP
+      tools, resources, prompts and sampling — and capture the flags.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/SabyasachiDhal/MCPGoat">★ View on GitHub</a>
+      <a class="btn" href="https://glama.ai/mcp/servers/SabyasachiDhal/MCPGoat">Browse on Glama</a>
+      <a class="btn" href="#quickstart">Quick start →</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat"><div class="n">26</div><div class="l">Challenges</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Levels each</div></div>
+    <div class="stat"><div class="n">78</div><div class="l">Scored flags</div></div>
+    <div class="stat"><div class="n">20+</div><div class="l">Vuln classes</div></div>
+  </div>
+
+  <section id="what">
+    <h2>What is MCPGoat?</h2>
+    <p class="sub">
+      As AI agents adopt the <b>Model Context Protocol</b>, MCP servers become a fresh,
+      under-tested attack surface. MCPGoat is a safe, self-hosted lab to <b>learn MCP
+      security</b> the only way that really sticks — by breaking a
+      target that's built to be broken.
+    </p>
+    <div class="grid g3">
+      <div class="card">
+        <h3>🎚️ Tiered difficulty</h3>
+        <p>Every challenge is implemented at Easy, Moderate and Difficult. The same flaw
+        hardens as you climb — from no auth to OAuth-style tokens, from full output to
+        blind / out-of-band.</p>
+      </div>
+      <div class="card">
+        <h3>🏁 Capture-the-flag scoreboard</h3>
+        <p>A live scoreboard tracks 78 capture-the-flag flags. A 4th <b>Secure</b> level
+        per challenge is the fixed reference where every documented exploit fails.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 Real MCP attack surface</h3>
+        <p>Attack it over Streamable HTTP with the bundled client, MCP Inspector,
+        <code>curl</code> or Burp — plus a victim-agent harness that shows a real LLM
+        getting exploited.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="coverage">
+    <h2>Vulnerability coverage</h2>
+    <p class="sub">MCP-specific attacks alongside the classic web bugs that resurface in
+      MCP servers — maximum coverage for AI / LLM security testing.</p>
+    <div class="vulns">
+      <span class="tag"><b>MCP:</b> Tool poisoning</span>
+      <span class="tag">Tool shadowing</span>
+      <span class="tag">Rug-pull (TOCTOU)</span>
+      <span class="tag">Indirect prompt injection</span>
+      <span class="tag">Prompt-template injection</span>
+      <span class="tag">Resource injection</span>
+      <span class="tag">Sampling abuse</span>
+      <span class="tag">Invisible / Unicode-tag stego</span>
+      <span class="tag">OAuth token-audience confusion</span>
+      <span class="tag">Command injection (RCE)</span>
+      <span class="tag">SSRF</span>
+      <span class="tag">SQL injection</span>
+      <span class="tag">NoSQL injection</span>
+      <span class="tag">Path traversal</span>
+      <span class="tag">Broken authz / IDOR</span>
+      <span class="tag">Secrets exposure</span>
+      <span class="tag">SSTI</span>
+      <span class="tag">XXE</span>
+      <span class="tag">Insecure deserialization</span>
+      <span class="tag">DNS rebinding</span>
+      <span class="tag">CORS misconfig</span>
+      <span class="tag">Predictable session IDs</span>
+      <span class="tag">Unbounded consumption / DoS</span>
+      <span class="tag">ReDoS</span>
+      <span class="tag">Supply-chain (typosquat)</span>
+    </div>
+  </section>
+
+  <section id="levels">
+    <h2>Pick your level, then pentest</h2>
+    <p class="sub">The same vulnerability hardens as you climb, so you can grow from
+      first exploit to multi-step, cross-primitive chains.</p>
+    <table class="levels">
+      <thead><tr><th></th><th>Easy</th><th>Moderate</th><th>Difficult</th><th class="secure">Secure</th></tr></thead>
+      <tbody>
+        <tr><td>Auth</td><td>none</td><td>static token</td><td>OAuth-style / crypto</td><td class="secure">enforced</td></tr>
+        <tr><td>Filtering</td><td>none</td><td>bypassable blacklist</td><td>allowlist with a gap</td><td class="secure">complete</td></tr>
+        <tr><td>Feedback</td><td>full output</td><td>partial</td><td>blind / out-of-band</td><td class="secure">none leaked</td></tr>
+        <tr><td>Steps</td><td>1</td><td>2–3 chained</td><td>multi-step</td><td class="secure">exploit fails</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="quickstart">
+    <h2>Quick start</h2>
+    <p class="sub">One command with Docker — self-contained, and any RCE stays inside the
+      container. Keep it bound to <code>127.0.0.1</code>.</p>
+    <pre class="cmd"><span class="c"># clone &amp; run — control panel on http://127.0.0.1:7332</span>
+git clone https://github.com/SabyasachiDhal/MCPGoat.git
+<span class="p">cd</span> MCPGoat
+docker compose up --build</pre>
+    <div class="warn">
+      <b>⚠️ Authorized training use only.</b> MCPGoat intentionally contains RCE, SSRF,
+      SQLi, secret leakage and more. Run it locally or in a container — never expose it to
+      a network you don't own.
+    </div>
+  </section>
+
+  <section id="screens">
+    <h2>What it looks like</h2>
+    <p class="sub">The control panel is config + progress only — pick a level and track
+      flags. The real target is the MCP server itself — here, in MCP Inspector.</p>
+    <div class="shots">
+      <figure>
+        <img src="img/control-panel.png" alt="MCPGoat control panel — select an MCP penetration-testing difficulty level and track the capture-the-flag scoreboard" loading="lazy">
+        <figcaption>Control panel — pick a level, track the scoreboard</figcaption>
+      </figure>
+      <figure>
+        <img src="img/mcp-inspector.png" alt="MCP Inspector connected to the vulnerable MCPGoat Model Context Protocol server, listing its tools" loading="lazy">
+        <figcaption>MCP Inspector connected to the vulnerable server</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Built by <a href="https://www.linkedin.com/in/sabyasachidhal/">Sabyasachi Dhal</a>
+      · <a href="https://github.com/SabyasachiDhal/MCPGoat">GitHub</a>
+      · <a href="https://glama.ai/mcp/servers/SabyasachiDhal/MCPGoat">Glama</a>
+      · MIT License
+    </p>
+    <p class="disc">
+      MCPGoat is an independent open-source project — not affiliated with or endorsed by
+      any similarly-named project.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
