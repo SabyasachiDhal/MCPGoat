@@ -52,7 +52,8 @@ a real AI agent are the other two ways):
 ### Docker (recommended — one command, self-contained, RCE stays in the container)
 
 ```bash
-cd mcpgoat
+git clone https://github.com/SabyasachiDhal/MCPGoat.git
+cd MCPGoat
 docker compose up --build            # → http://127.0.0.1:7332
 # or:
 docker build -t mcpgoat .
@@ -71,6 +72,8 @@ interface. Start at a level with `-e MCPGOAT_LEVEL=difficult`.
 Requires **Node 18+** (tested on Node 22/23/24; uses the built-in `node:sqlite`).
 
 ```bash
+git clone https://github.com/SabyasachiDhal/MCPGoat.git
+cd MCPGoat
 npm install
 npm start                 # serves http://127.0.0.1:7332   (tsx, no build step)
 # or compiled:  npm run build && npm run serve
