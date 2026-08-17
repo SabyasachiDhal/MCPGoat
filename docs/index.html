@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>MCPGoat — A Deliberately Vulnerable MCP Server for Penetration Testing</title>
-<meta name="description" content="A deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 3 difficulty levels, 78 flags. Free and MIT-licensed.">
-<meta name="keywords" content="vulnerable MCP server, MCP penetration testing, Model Context Protocol security, MCP security lab, MCP CTF, AI security, LLM security, prompt injection, tool poisoning, deliberately insecure MCP">
+<meta name="description" content="MCPGoat (MCP Goat) — a deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 3 difficulty levels, 78 flags. Free and MIT-licensed.">
+<meta name="keywords" content="MCPGoat, MCP Goat, vulnerable MCP, vulnerable MCP server, MCP penetration testing, Model Context Protocol security, MCP security lab, MCP CTF, MCP hacking, DVMCP, damn vulnerable MCP, AI security, LLM security, prompt injection, tool poisoning, deliberately insecure MCP">
 <meta name="author" content="Sabyasachi Dhal">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#0d1117">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MCPGoat">
 <meta property="og:title" content="MCPGoat — Hack the Model Context Protocol">
-<meta property="og:description" content="A deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 3 difficulty levels, 78 flags. Free and MIT-licensed.">
+<meta property="og:description" content="MCPGoat (MCP Goat) — a deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 3 difficulty levels, 78 flags. Free and MIT-licensed.">
 <meta property="og:url" content="https://sabyasachidhal.github.io/MCPGoat/">
 <meta property="og:image" content="https://sabyasachidhal.github.io/MCPGoat/img/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -25,7 +25,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MCPGoat — Hack the Model Context Protocol">
-<meta name="twitter:description" content="A deliberately vulnerable Model Context Protocol (MCP) server for hands-on penetration-testing practice. 26 challenges, 78 flags, MIT-licensed.">
+<meta name="twitter:description" content="MCPGoat (MCP Goat) — a deliberately vulnerable Model Context Protocol (MCP) server for penetration-testing practice. 26 challenges, 78 flags, MIT-licensed.">
 <meta name="twitter:image" content="https://sabyasachidhal.github.io/MCPGoat/img/og-card.png">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐐</text></svg>">
@@ -39,11 +39,13 @@
       "@id": "https://sabyasachidhal.github.io/MCPGoat/#website",
       "url": "https://sabyasachidhal.github.io/MCPGoat/",
       "name": "MCPGoat",
-      "description": "A deliberately vulnerable Model Context Protocol (MCP) server for penetration-testing practice."
+      "alternateName": ["MCP Goat", "MCPGoat CTF"],
+      "description": "MCPGoat (MCP Goat) is a deliberately vulnerable Model Context Protocol (MCP) server for penetration-testing practice."
     },
     {
       "@type": "SoftwareApplication",
       "name": "MCPGoat",
+      "alternateName": ["MCP Goat", "Vulnerable MCP Server"],
       "applicationCategory": "SecurityApplication",
       "operatingSystem": "Docker, Node.js (cross-platform)",
       "softwareVersion": "2.0.0",
@@ -53,7 +55,33 @@
       "license": "https://opensource.org/licenses/MIT",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "author": { "@type": "Person", "name": "Sabyasachi Dhal", "url": "https://www.linkedin.com/in/sabyasachidhal/" },
-      "keywords": "vulnerable MCP server, MCP penetration testing, Model Context Protocol security, MCP CTF, AI security, LLM security, prompt injection, tool poisoning"
+      "keywords": "MCPGoat, MCP Goat, vulnerable MCP, vulnerable MCP server, MCP penetration testing, Model Context Protocol security, MCP CTF, DVMCP, AI security, LLM security, prompt injection, tool poisoning"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sabyasachidhal.github.io/MCPGoat/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it \"MCPGoat\" or \"MCP Goat\"?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Both refer to this same project. MCPGoat — one word — is the official name; \"MCP Goat\" is a common way to write it. Either way it is a free, MIT-licensed, deliberately vulnerable MCP server for security training." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a vulnerable MCP server?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A vulnerable MCP server is an intentionally insecure Model Context Protocol server used to practice attacks — tool poisoning, prompt injection, rug-pulls, SSRF, SQL injection, RCE — safely and legally in a self-hosted lab instead of against production systems." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does MCPGoat compare to DVMCP (Damn Vulnerable MCP Server)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Both are deliberately vulnerable MCP servers for security training. DVMCP offers 10 challenges of increasing difficulty. MCPGoat implements 26 challenges, each at Easy, Moderate and Difficult plus a Secure reference level — 78 scored CTF flags — and adds a victim-agent harness that demonstrates a real LLM agent being exploited." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is MCPGoat free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. MCPGoat is open source under the MIT license and self-hosted — one docker compose up --build and the lab is running locally." }
+        }
+      ]
     }
   ]
 }
@@ -213,9 +241,9 @@
     <h2>What is MCPGoat?</h2>
     <p class="sub">
       As AI agents adopt the <b>Model Context Protocol</b>, MCP servers become a fresh,
-      under-tested attack surface. MCPGoat is a safe, self-hosted lab to <b>learn MCP
-      security</b> the only way that really sticks — by breaking a
-      target that's built to be broken.
+      under-tested attack surface. MCPGoat (also written <b>MCP Goat</b>) is a safe,
+      self-hosted <b>vulnerable MCP</b> lab to <b>learn MCP security</b> the only way
+      that really sticks — by breaking a target that's built to be broken.
     </p>
     <div class="grid g3">
       <div class="card">
@@ -314,6 +342,40 @@ docker compose up --build</pre>
         <img src="img/mcp-inspector.png" alt="MCP Inspector connected to the vulnerable MCPGoat Model Context Protocol server, listing its tools" loading="lazy">
         <figcaption>MCP Inspector connected to the vulnerable server</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <p class="sub">Quick answers — naming, how MCPGoat relates to other vulnerable MCP
+      labs like DVMCP, and what it costs (nothing).</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Is it &ldquo;MCPGoat&rdquo; or &ldquo;MCP Goat&rdquo;?</h3>
+        <p>Both refer to this same project. <b>MCPGoat</b> — one word — is the official
+        name; &ldquo;MCP Goat&rdquo; is a common way to write it. Either way it is a free,
+        MIT-licensed, deliberately vulnerable MCP server for security training.</p>
+      </div>
+      <div class="card">
+        <h3>What is a vulnerable MCP server?</h3>
+        <p>An intentionally insecure Model Context Protocol server used to practice
+        attacks — tool poisoning, prompt injection, rug-pulls, SSRF, SQL injection,
+        RCE — safely and legally in a self-hosted lab instead of against production
+        systems.</p>
+      </div>
+      <div class="card">
+        <h3>How does MCPGoat compare to DVMCP (Damn Vulnerable MCP Server)?</h3>
+        <p>Both are deliberately vulnerable MCP servers for security training.
+        <b>DVMCP</b> offers 10 challenges of increasing difficulty. <b>MCPGoat</b>
+        implements 26 challenges, each at Easy, Moderate and Difficult plus a Secure
+        reference level — 78 scored CTF flags — and adds a victim-agent harness that
+        demonstrates a real LLM agent being exploited.</p>
+      </div>
+      <div class="card">
+        <h3>Is MCPGoat free?</h3>
+        <p>Yes. MCPGoat is open source under the MIT license and self-hosted — one
+        <code>docker compose up --build</code> and the lab is running locally.</p>
+      </div>
     </div>
   </section>
 

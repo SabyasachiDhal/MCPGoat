@@ -6,7 +6,8 @@
 **🌐 Website:** <https://sabyasachidhal.github.io/MCPGoat/>
 &nbsp;·&nbsp; **Listed on [Glama](https://glama.ai/mcp/servers/SabyasachiDhal/MCPGoat)**
 
-A deliberately insecure **Model Context Protocol** server for practicing MCP
+**MCPGoat** (also written *MCP Goat*) is a deliberately **vulnerable MCP server** —
+an insecure-by-design **Model Context Protocol** implementation for practicing MCP
 penetration testing. Every challenge is implemented at **three difficulty levels
 (Easy / Moderate / Difficult)** behind a tiered level switch, with a
 capture-the-flag scoreboard. Runs over
@@ -27,6 +28,18 @@ distinct flags**, exercising every major MCP primitive (tools, resources,
 prompts, **sampling**) plus the HTTP **transport** layer. Each challenge also
 has a 4th **Secure** level: the fixed, unexploitable reference where every
 documented exploit fails (verify with `npm run attack -- … secure`).
+
+### How MCPGoat compares to DVMCP and other vulnerable MCP labs
+
+| Lab | Scope | Model |
+|---|---|---|
+| **MCPGoat** (this project) | **26 challenges → 78 scored flags** | every challenge at Easy / Moderate / Difficult **+ a Secure reference level**; CTF scoreboard; victim-agent harness |
+| [DVMCP — Damn Vulnerable MCP Server](https://github.com/harishsg993010/damn-vulnerable-MCP-server) | 10 challenges | increasing difficulty (easy → hard), one implementation each |
+| [Vulnerable MCP Servers Lab](https://github.com/appsecco/vulnerable-mcp-servers-lab) | collection | one standalone server per vulnerability |
+
+All of these labs are worth your time. MCPGoat aims to be the **deepest single
+target**: the same flaw hardens across tiers, so you can progress from a first
+exploit to blind, multi-step chains — then verify the fix against the Secure level.
 
 ---
 
